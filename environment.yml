@@ -1,0 +1,11 @@
+name: aiz
+dependencies:
+  - python=3.10
+  - numpy=1.*
+  - ipykernel
+  - notebook
+  - ipywidgets
+  - pip
+  - pip:
+    - memory-profiler
+    - aizynthfinder[all]
