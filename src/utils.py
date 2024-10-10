@@ -3,6 +3,21 @@ import json
 import pandas as pd
 import numpy as np
 import multiprocessing as mp
+from rdkit import Chem
+from rdkit.Chem.MolStandardize.rdMolStandardize import SuperParent
+
+def mol2smi(mol: Chem.Mol) -> str:
+    return Chem.MolToSmiles(mol) if pd.notna(mol) else None
+
+def smi2mol(smiles: str) -> Chem.Mol:
+    return Chem.MolFromSmiles(smiles) if pd.notna(smiles) else None
+
+def super_parent(mol: Chem.Mol) -> Chem.Mol | None:
+    try:
+        return SuperParent(mol)
+    except:
+        return None
+
 
 def hash_dict(d: dict):
     return hashlib.sha256(json.dumps(d, sort_keys=True).encode('utf8')).hexdigest()
